@@ -1,0 +1,60 @@
+[gd_scene load_steps=8 format=3 uid="uid://b81vgwmredpnx"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_3xxyj"]
+[ext_resource type="PackedScene" uid="uid://pbmyh1qru7p" path="res://characters/happy_boo/happy_boo.tscn" id="1_oiiwq"]
+[ext_resource type="PackedScene" uid="uid://0apg14g0rmxs" path="res://scenes/gun.tscn" id="3_7f3so"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cm0lx"]
+radius = 65.0308
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iysja"]
+radius = 56.3028
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_piqww"]
+bg_color = Color(0.169245, 0.169245, 0.169245, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ow0ga"]
+bg_color = Color(0.266667, 0.815686, 0.301961, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_3xxyj")
+
+[node name="HappyBoo" parent="." instance=ExtResource("1_oiiwq")]
+position = Vector2(5, 65)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 29)
+shape = SubResource("CircleShape2D_cm0lx")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Gun" parent="." instance=ExtResource("3_7f3so")]
+position = Vector2(-6, 12)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CircleShape2D_iysja")
+debug_color = Color(0.858336, 0.347499, 0.294452, 0.42)
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+offset_left = -73.0
+offset_top = -61.0
+offset_right = 93.0
+offset_bottom = -46.0
+theme_override_styles/background = SubResource("StyleBoxFlat_piqww")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ow0ga")
+value = 100.0
+show_percentage = false
